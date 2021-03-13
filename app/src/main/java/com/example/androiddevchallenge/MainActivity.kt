@@ -25,7 +25,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
-import com.example.androiddevchallenge.second_screen.SecondScreenContent
+import com.example.androiddevchallenge.login.LoginContent
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import com.example.androiddevchallenge.welcome.LoginContent
 import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
@@ -51,12 +51,12 @@ fun MyApp() {
     NavHost(navController, startDestination = "home") {
         composable("home") {
             LoginContent() {
-                navController.navigate("secondScreen")
+                navController.navigate("login")
             }
         }
 
-        composable("secondScreen") {
-            SecondScreenContent()
+        composable("login") {
+            LoginContent()
         }
     }
 }
