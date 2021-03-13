@@ -22,8 +22,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import com.example.androiddevchallenge.home.HomeContent
+import com.example.androiddevchallenge.second_screen.SecondScreenContent
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
 class MainActivity : AppCompatActivity() {
@@ -43,7 +45,13 @@ fun MyApp() {
 
     NavHost(navController, startDestination = "home") {
         composable("home") {
-            HomeContent()
+            HomeContent() {
+                navController.navigate("secondScreen")
+            }
+        }
+
+        composable("secondScreen") {
+            SecondScreenContent()
         }
     }
 }

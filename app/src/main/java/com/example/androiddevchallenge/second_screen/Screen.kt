@@ -13,24 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.home
+package com.example.androiddevchallenge.second_screen
 
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.R
 
 @Composable
-fun HomeContent(buttonClickListener: (() -> Unit) = {}) {
+fun SecondScreenContent() {
     Surface(color = MaterialTheme.colors.background) {
         Scaffold(
             topBar = {
@@ -41,17 +38,7 @@ fun HomeContent(buttonClickListener: (() -> Unit) = {}) {
                 )
             }
         ) {
-            Text(text = "Ready... Set... GO!")
-
-            Button(
-                modifier = Modifier
-                    .padding(top = 16.dp)
-                    .wrapContentSize()
-                    .padding(16.dp),
-                onClick = buttonClickListener
-            ) {
-                Text(text = "Go to next screen!")
-            }
+            Text(text = "Second screen!", color = Color.Blue)
         }
     }
 }
