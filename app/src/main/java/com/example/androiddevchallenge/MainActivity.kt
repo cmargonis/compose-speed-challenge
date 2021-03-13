@@ -20,20 +20,25 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
-import com.example.androiddevchallenge.home.HomeContent
 import com.example.androiddevchallenge.second_screen.SecondScreenContent
 import com.example.androiddevchallenge.ui.theme.MyTheme
+import com.example.androiddevchallenge.welcome.LoginContent
+import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
         setContent {
             MyTheme {
-                MyApp()
+                ProvideWindowInsets(consumeWindowInsets = false) {
+                    MyApp()
+                }
             }
         }
     }
@@ -45,7 +50,7 @@ fun MyApp() {
 
     NavHost(navController, startDestination = "home") {
         composable("home") {
-            HomeContent() {
+            LoginContent() {
                 navController.navigate("secondScreen")
             }
         }
