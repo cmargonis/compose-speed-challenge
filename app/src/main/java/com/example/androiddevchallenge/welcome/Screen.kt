@@ -38,7 +38,7 @@ import com.example.androiddevchallenge.R
 import java.util.Locale
 
 @Composable
-fun LoginContent(buttonClickListener: (() -> Unit) = {}) {
+fun WelcomeContent(buttonClickListener: (() -> Unit) = {}) {
     Surface(color = MaterialTheme.colors.background) {
         Box(
             modifier = Modifier

@@ -55,7 +55,7 @@ import com.example.androiddevchallenge.R
 import java.util.Locale
 
 @Composable
-fun LoginContent() {
+fun LoginContent(loginListener: (() -> Unit) = {}) {
     Surface(color = MaterialTheme.colors.background) {
         Box(
             modifier = Modifier
@@ -151,7 +151,7 @@ fun LoginContent() {
                         .fillMaxWidth()
                         .wrapContentHeight(),
                     shape = MaterialTheme.shapes.medium,
-                    onClick = {}
+                    onClick = loginListener
                 ) {
                     Text(
                         text = "log in".toUpperCase(Locale.getDefault()),

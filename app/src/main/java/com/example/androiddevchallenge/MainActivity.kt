@@ -25,9 +25,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
+import com.example.androiddevchallenge.home.HomeContent
 import com.example.androiddevchallenge.login.LoginContent
 import com.example.androiddevchallenge.ui.theme.MyTheme
-import com.example.androiddevchallenge.welcome.LoginContent
+import com.example.androiddevchallenge.welcome.WelcomeContent
 import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 
 class MainActivity : AppCompatActivity() {
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyTheme {
-                ProvideWindowInsets(consumeWindowInsets = false) {
+                ProvideWindowInsets(consumeWindowInsets = true) {
                     MyApp()
                 }
             }
@@ -48,15 +49,21 @@ class MainActivity : AppCompatActivity() {
 fun MyApp() {
     val navController = rememberNavController()
 
-    NavHost(navController, startDestination = "home") {
-        composable("home") {
-            LoginContent() {
+    NavHost(navController, startDestination = "welcome") {
+        composable("welcome") {
+            WelcomeContent {
                 navController.navigate("login")
             }
         }
 
         composable("login") {
-            LoginContent()
+            LoginContent {
+                navController.navigate("home")
+            }
+        }
+
+        composable("home") {
+            HomeContent()
         }
     }
 }
