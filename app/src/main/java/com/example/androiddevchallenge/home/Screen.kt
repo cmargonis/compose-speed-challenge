@@ -19,12 +19,16 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.FabPosition
@@ -53,6 +57,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.ui.theme.MyTheme
+import com.example.androiddevchallenge.ui.widgets.Avatar
 import dev.chrisbanes.accompanist.insets.LocalWindowInsets
 import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 import java.util.Locale
@@ -123,14 +128,7 @@ fun HomeContent() {
                         .padding(start = 16.dp, top = 24.dp)
                 )
 
-                Text(
-                    text = "Align your body".toUpperCase(Locale.getDefault()),
-                    style = MaterialTheme.typography.h2,
-                    color = MaterialTheme.colors.onBackground,
-                    modifier = Modifier
-                        .wrapContentSize()
-                        .padding(start = 16.dp, top = 24.dp)
-                )
+                AlignYourBody()
 
                 Text(
                     text = "Align your mind".toUpperCase(Locale.getDefault()),
@@ -141,6 +139,31 @@ fun HomeContent() {
                         .padding(start = 16.dp, top = 24.dp)
                 )
             }
+        }
+    }
+}
+
+@Composable
+private fun AlignYourBody() {
+    Text(
+        text = "Align your body".toUpperCase(Locale.getDefault()),
+        style = MaterialTheme.typography.h2,
+        color = MaterialTheme.colors.onBackground,
+        modifier = Modifier
+            .wrapContentSize()
+            .padding(start = 16.dp, top = 24.dp)
+    )
+    LazyRow(
+        modifier = Modifier
+            .padding(top = 8.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        item {
+            Spacer(modifier = Modifier.width(8.dp))
+        }
+        items(bodyItems) { item ->
+            Avatar(image = item.image, title = item.title)
         }
     }
 }
