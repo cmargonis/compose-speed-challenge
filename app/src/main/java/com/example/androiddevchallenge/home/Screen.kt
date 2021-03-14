@@ -124,14 +124,7 @@ fun HomeContent() {
 
                 AlignYourBody()
 
-                Text(
-                    text = "Align your mind".toUpperCase(Locale.getDefault()),
-                    style = MaterialTheme.typography.h2,
-                    color = MaterialTheme.colors.onBackground,
-                    modifier = Modifier
-                        .wrapContentSize()
-                        .padding(start = 16.dp, top = 24.dp)
-                )
+                AlignYourMind()
             }
         }
     }
@@ -210,6 +203,36 @@ private fun AlignYourBody() {
             Spacer(modifier = Modifier.width(8.dp))
         }
         items(bodyItems) { item ->
+            Avatar(image = item.image, title = item.title)
+        }
+
+        item {
+            Spacer(modifier = Modifier.width(8.dp))
+        }
+    }
+}
+
+@Composable
+private fun AlignYourMind() {
+    Text(
+        text = "Align your mind".toUpperCase(Locale.getDefault()),
+        style = MaterialTheme.typography.h2,
+        color = MaterialTheme.colors.onBackground,
+        modifier = Modifier
+            .wrapContentSize()
+            .padding(start = 16.dp, top = 24.dp)
+    )
+
+    LazyRow(
+        modifier = Modifier
+            .padding(top = 8.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        item {
+            Spacer(modifier = Modifier.width(8.dp))
+        }
+        items(mindItems) { item ->
             Avatar(image = item.image, title = item.title)
         }
 
