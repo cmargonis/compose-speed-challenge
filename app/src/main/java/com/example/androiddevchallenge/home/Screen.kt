@@ -58,6 +58,7 @@ import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import com.example.androiddevchallenge.ui.widgets.Avatar
+import com.example.androiddevchallenge.ui.widgets.RowCard
 import dev.chrisbanes.accompanist.insets.LocalWindowInsets
 import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 import java.util.Locale
@@ -119,14 +120,7 @@ fun HomeContent() {
                     )
                 )
 
-                Text(
-                    text = "favorite collections".toUpperCase(Locale.getDefault()),
-                    style = MaterialTheme.typography.h2,
-                    color = MaterialTheme.colors.onBackground,
-                    modifier = Modifier
-                        .wrapContentSize()
-                        .padding(start = 16.dp, top = 24.dp)
-                )
+                FavoriteCollections()
 
                 AlignYourBody()
 
@@ -139,6 +133,59 @@ fun HomeContent() {
                         .padding(start = 16.dp, top = 24.dp)
                 )
             }
+        }
+    }
+}
+
+@Composable
+private fun FavoriteCollections() {
+    Text(
+        text = "favorite collections".toUpperCase(Locale.getDefault()),
+        style = MaterialTheme.typography.h2,
+        color = MaterialTheme.colors.onBackground,
+        modifier = Modifier
+            .wrapContentSize()
+            .padding(start = 16.dp, top = 24.dp)
+    )
+
+    LazyRow(
+        modifier = Modifier
+            .padding(top = 8.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        item {
+            Spacer(modifier = Modifier.width(8.dp))
+        }
+        items(favoritesFirst) { item ->
+            RowCard(
+                image = item.image,
+                title = item.title
+            )
+        }
+        item {
+            Spacer(modifier = Modifier.width(8.dp))
+        }
+    }
+
+    LazyRow(
+        modifier = Modifier
+            .padding(top = 8.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        item {
+            Spacer(modifier = Modifier.width(8.dp))
+        }
+        items(favoritesSecond) { item ->
+            RowCard(
+                image = item.image,
+                title = item.title
+            )
+        }
+
+        item {
+            Spacer(modifier = Modifier.width(8.dp))
         }
     }
 }
@@ -164,6 +211,10 @@ private fun AlignYourBody() {
         }
         items(bodyItems) { item ->
             Avatar(image = item.image, title = item.title)
+        }
+
+        item {
+            Spacer(modifier = Modifier.width(8.dp))
         }
     }
 }

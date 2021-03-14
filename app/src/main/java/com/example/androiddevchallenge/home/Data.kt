@@ -20,10 +20,13 @@ import com.example.androiddevchallenge.R
 
 data class SootheItem(@DrawableRes val image: Int, val title: String)
 
-val favorites = listOf(
+val favoritesFirst = listOf(
     SootheItem(R.drawable.short_mantras, "Short mantras"),
     SootheItem(R.drawable.stress_and_anxiety, "Stress and anxiety"),
-    SootheItem(R.drawable.nature_meditations, "Nature meditations"),
+    SootheItem(R.drawable.nature_meditations, "Nature meditations")
+)
+
+val favoritesSecond = listOf(
     SootheItem(R.drawable.self_massage, "Self-massage"),
     SootheItem(R.drawable.pre_natal_yoga, "Pre natal yoga"),
     SootheItem(R.drawable.high_stress, "High stress")

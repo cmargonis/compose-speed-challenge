@@ -56,13 +56,13 @@ fun RowCard(@DrawableRes image: Int, title: String) {
                 data = image,
                 contentDescription = "Card picture",
                 modifier = Modifier.size(56.dp),
-                contentScale = ContentScale.FillWidth,
+                contentScale = ContentScale.FillBounds,
             )
             Text(
                 text = title,
                 modifier = Modifier
                     .wrapContentSize()
-                    .padding(start = 16.dp, end = 16.dp),
+                    .padding(start = 16.dp, end = 8.dp),
                 style = MaterialTheme.typography.h3,
                 color = MaterialTheme.colors.onSurface
             )
