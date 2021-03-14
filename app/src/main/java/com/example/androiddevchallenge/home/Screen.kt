@@ -23,24 +23,38 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import dev.chrisbanes.accompanist.insets.LocalWindowInsets
+import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 import java.util.Locale
 
 @Composable
@@ -53,6 +67,80 @@ fun HomeContent() {
             floatingActionButtonPosition = FabPosition.Center,
             isFloatingActionButtonDocked = true
         ) {
+            val insets = LocalWindowInsets.current
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = with(LocalDensity.current) { insets.statusBars.top.toDp() + 16.dp })
+            ) {
+
+                var searchValue: String by remember { mutableStateOf("") }
+                val focusManager = LocalFocusManager.current
+
+                TextField(
+                    value = searchValue,
+                    placeholder = {
+                        Text(text = "Search", style = MaterialTheme.typography.body1)
+                    },
+                    keyboardOptions = KeyboardOptions(
+                        autoCorrect = true,
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Done
+                    ),
+                    colors = TextFieldDefaults.textFieldColors(backgroundColor = MaterialTheme.colors.surface),
+                    textStyle = MaterialTheme.typography.body1.copy(
+                        color = MaterialTheme.colors.onSurface
+                    ),
+                    modifier = Modifier
+                        .padding(start = 16.dp, end = 16.dp)
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
+                    singleLine = true,
+                    onValueChange = { newValue ->
+                        searchValue = newValue
+                    },
+                    leadingIcon = {
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_search),
+                            contentDescription = "Search Icon",
+                            colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onSurface),
+                            modifier = Modifier.size(18.dp)
+                        )
+                    },
+                    keyboardActions = KeyboardActions(
+                        onDone = {
+                            focusManager.clearFocus()
+                        }
+                    )
+                )
+
+                Text(
+                    text = "favorite collections".toUpperCase(Locale.getDefault()),
+                    style = MaterialTheme.typography.h2,
+                    color = MaterialTheme.colors.onBackground,
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .padding(start = 16.dp, top = 24.dp)
+                )
+
+                Text(
+                    text = "Align your body".toUpperCase(Locale.getDefault()),
+                    style = MaterialTheme.typography.h2,
+                    color = MaterialTheme.colors.onBackground,
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .padding(start = 16.dp, top = 24.dp)
+                )
+
+                Text(
+                    text = "Align your mind".toUpperCase(Locale.getDefault()),
+                    style = MaterialTheme.typography.h2,
+                    color = MaterialTheme.colors.onBackground,
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .padding(start = 16.dp, top = 24.dp)
+                )
+            }
         }
     }
 }
@@ -118,8 +206,10 @@ fun BottomBar(color: Color) {
 
 @Preview("Light Theme", widthDp = 360, heightDp = 640)
 @Composable
-fun LightPreview() {
+fun HomePreview() {
     MyTheme {
-        BottomBar(color = MaterialTheme.colors.background)
+        ProvideWindowInsets(consumeWindowInsets = true) {
+            HomeContent()
+        }
     }
 }
