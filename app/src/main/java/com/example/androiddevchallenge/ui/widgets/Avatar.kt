@@ -16,7 +16,6 @@
 package com.example.androiddevchallenge.ui.widgets
 
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -31,11 +30,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.ui.theme.MyTheme
+import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
 fun Avatar(@DrawableRes image: Int, title: String) {
@@ -46,11 +45,11 @@ fun Avatar(@DrawableRes image: Int, title: String) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Surface(shape = CircleShape) {
-            Image(
+            CoilImage(
+                data = image,
+                contentDescription = "Card picture",
                 modifier = Modifier.size(88.dp),
-                painter = painterResource(id = image),
-                contentScale = ContentScale.FillBounds,
-                contentDescription = "Card picture"
+                contentScale = ContentScale.FillBounds
             )
         }
         Text(
